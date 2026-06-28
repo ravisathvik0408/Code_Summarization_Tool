@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+import os
 import ast
 from ast_parser.parser import parse_to_ast
 from ast_parser.ast_serializer import get_ast_summary_info
@@ -149,7 +150,8 @@ AST Nodes : {node_count}
 # ── History Section ───────────────────────────────────────────────────────────
 st.markdown("---")
 if st.button("🗑 Clear History"):
-    with open("data/samples.json", "w") as f:
+    samples_path = os.path.join(os.path.dirname(__file__), "data", "samples.json")
+    with open(samples_path, "w") as f:
         f.write("[]")
     st.success("History cleared successfully!")
 st.markdown("### 📚 Previous Summaries")
