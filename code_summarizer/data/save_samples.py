@@ -1,8 +1,9 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 SAMPLES_FILE = os.path.join(os.path.dirname(__file__), "samples.json")
+IST = timezone(timedelta(hours=5, minutes=30))
 
 
 def save_sample(code: str, summary: str):
@@ -22,7 +23,7 @@ def save_sample(code: str, summary: str):
 
     # Append new sample
     samples.append({
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S"),
         "code": code,
         "summary": summary
     })
