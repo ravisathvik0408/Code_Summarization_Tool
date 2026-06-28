@@ -1,7 +1,6 @@
-from transformers import RobertaTokenizer, T5ForConditionalGeneration
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import re
 
-# ✅ This is the REAL model that exists on HuggingFace
 MODEL_NAME = "Salesforce/codet5-base-multi-sum"
 
 _tokenizer = None
@@ -13,9 +12,8 @@ def load_model():
 
     if _tokenizer is None or _model is None:
         print("\n[~] Loading CodeT5 model (first run may take a minute)...")
-        # ✅ Must use RobertaTokenizer, NOT AutoTokenizer
-        _tokenizer = RobertaTokenizer.from_pretrained(MODEL_NAME)
-        _model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
+        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
+        _model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
         print("[✓] Model loaded successfully!\n")
 
     return _tokenizer, _model
