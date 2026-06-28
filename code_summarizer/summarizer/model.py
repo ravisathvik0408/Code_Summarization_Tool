@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import RobertaTokenizer, T5ForConditionalGeneration
 import re
 
 MODEL_NAME = "Salesforce/codet5-base-multi-sum"
@@ -12,8 +12,8 @@ def load_model():
 
     if _tokenizer is None or _model is None:
         print("\n[~] Loading CodeT5 model (first run may take a minute)...")
-        _tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
-        _model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+        _tokenizer = RobertaTokenizer.from_pretrained(MODEL_NAME)
+        _model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
         print("[✓] Model loaded successfully!\n")
 
     return _tokenizer, _model
